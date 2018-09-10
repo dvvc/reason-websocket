@@ -11,7 +11,7 @@
   ],
   // "bs-dependencies": ["ocaml-ssl"],
   "ocaml-libraries": ["thread"],
-  "namespaced": true,
+  "namespace": true,
   "entries": [{
   //   "backend": "native",
   //   "main-module": "SecureServerExample"
