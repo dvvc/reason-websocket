@@ -41,7 +41,7 @@ module Server = (Config: Config) => {
     Config.write(socket, response);
 
     let loop = ref(true);
-    let buffer = Buffer.create(1024);
+    let buffer = Buffer.create(4096);
     while(loop^) {
       WSock.make_read_frame(~mode=WSock.Server, socket, socket, ())(frame => {
         onMessage(frame.Websocket.Frame.content, response => {
@@ -56,7 +56,7 @@ module Server = (Config: Config) => {
   let handleConnection = (~onMessage, ~httpFallback, socket) => {
     let loop = ref(true);
     while (loop^) {
-      switch (Config.read(socket, 1024)) {
+      switch (Config.read(socket, 4096)) {
       | None => loop := false
       | Some(msg) =>
         let (method, path, headers) = Http.parse_request(msg);
